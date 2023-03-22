@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- id는 변수명 ? class는 패키지 + 클래스명 -->
+	<!-- <bean id="samtv" class="com.yedam.app.spring.SamsungTV" />
+	<bean id="lgtv" class="com.yedam.app.spring.LgTV" /> -->
+	
+	<context:component-scan base-package="com.yedam.app"></context:component-scan>
+</beans>
