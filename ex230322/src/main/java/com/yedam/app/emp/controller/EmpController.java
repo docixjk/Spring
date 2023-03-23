@@ -15,7 +15,8 @@ public class EmpController {
 	
 	// 경로
 	@RequestMapping("/getEmpInfo")
-	@ResponseBody
+	@ResponseBody // page가 아니라 데이터에 대한 정보를 말하는거
+	// 객체를 텍스트로 변환하는것을 직렬화라고 한다 (Jackson이 직렬화를 함) - databind
 	public EmpVO getEmpInfo(EmpVO empVO) {
 		// 하나의 메소드가 하나의 경로로 되게 한다
 		return empService.getEmpInfo(empVO);
