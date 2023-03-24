@@ -9,6 +9,13 @@
 </head>
 
 <body>
+  <div>
+    <form action="http://localhost:8088/spring/upload" method="post" enctype="multipart/form-data">
+      <input name="name" value="suna" placeholder="이름">
+      <input name="pic" type="file">
+      <button type="submit">전송</button>
+    </form>
+  </div>
   <script>
     // json으로 보낸다면 application/json; 꼭 적어야함 약속임
     // json은 소량으로 보내기엔 별로임 다량의 data를 처리하기 쉽기 위해 post방식을 사용)
