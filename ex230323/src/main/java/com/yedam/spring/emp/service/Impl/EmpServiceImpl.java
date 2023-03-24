@@ -19,7 +19,7 @@ public class EmpServiceImpl implements EmpService {
 	
 	
 	@Override
-	public List<EmpVO> getEmpALl() {
+	public List<EmpVO> getEmpAll() {
 		return empMapper.selectEmpAllList();
 	}
 

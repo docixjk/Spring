@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface EmpService {
 		// 전체조회
-		public List<EmpVO> getEmpALl();
+		public List<EmpVO> getEmpAll();
 		
 		// 단건조회
 		public EmpVO getEmp(EmpVO empVO);

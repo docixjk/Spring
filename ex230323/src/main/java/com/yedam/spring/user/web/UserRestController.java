@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,8 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yedam.spring.user.service.UserListVO;
 import com.yedam.spring.user.service.UserVO;
 
+//데이터를 반환하는 컨트롤러
 @CrossOrigin
-@RestController // 데이터를 반환하는 컨트롤러
+@RestController // @Controller + @ResponseBody => 해당 클래스 내의 모든 컨트롤러는 객체를 반환
 public class UserRestController {
 	// value = 경로 , method = RequestMethod.POST라는 전역변수 선언
 	// 뒤에 method를 정해주면 딱 그 방식으로만 가능하다
@@ -92,6 +94,13 @@ public class UserRestController {
 	@RequestMapping("/getInfo")
 	public UserVO getInfo(@RequestBody UserVO userVO) { // json으로 파싱해서 보내야함
 		return userVO;
+	}
+	
+	@PostMapping("/upload")
+	public String uploadFile(UserVO userVO) {
+//		System.out.println("name : " + userVO.getName());
+//		System.out.println("file : " + userVO.getPic().getOriginalFilename());
+		return "업로드를 완료했습니다.";
 	}
 	
 	
