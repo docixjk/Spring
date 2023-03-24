@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // json으로 보낸다면 application/json; 꼭 적어야함 약속임
+    // json은 소량으로 보내기엔 별로임 다량의 data를 처리하기 쉽기 위해 post방식을 사용)
+    fetch('http://localhost:8088/spring/getInfo',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8'
+        },
+        body: JSON.stringify({
+          name: 'suna',
+          age: 28
+        })
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data.name))
+      .catch((rej) => console.log(rej))
+  </script>
+</body>
+
+</html>

@@ -53,6 +53,8 @@
 	<logger name="jdbc.resultset">
 		<level value="warn" />
 	</logger>
+	
+	<!-- logger를 추가할 때는 무조건 root 위에 선언해주자 !! -->
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />

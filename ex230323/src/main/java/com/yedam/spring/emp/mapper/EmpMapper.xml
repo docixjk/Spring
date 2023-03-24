@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- 내가 지금 연결될 패키지의 경로를 가져온다 -->
+<mapper namespace="com.yedam.spring.emp.mapper.EmpMapper">
+	<!-- 전체조회 : resultType 필수, ORDER BY 꼭 써주자 -->
+	<!-- id는 항상 메소드의 이름을 가져온다 resultType은 반환타입에 따라 다른다 -->
+	<!-- 클래스(EmpVO)만 적어도 되는이유는ㄴ typeAliases에 선언했기 때문이다 -->
+	<select id="selectEmpAllList" resultType="EmpVO">
+		SELECT employee_id
+		     , first_name
+		     , last_name
+		     , email
+		     , phone_number
+		     , hire_date
+		     , job_id
+		     , salary
+		     , commission_pct
+		     , manager_id
+		     , department_id
+		  FROM employees
+		 ORDER BY employee_id
+	</select>
+	
+	<!-- 단건조회 : parameterType을 생략해도 된다 -->
+	<!-- ${ } 를 종종보게 되는데 사용 방식이 #{ } 와 전혀다름  -->
+	<!-- #{ } PreparedStatement 가 자동으로 타입이 변환되서 사용가능 - (?)에 넣는 형태 
+													  0 -> 0, kang -> 'kang' -->
+	<!-- ${ } 은 SQL문에 필요한 타입으로 변환하지 않고 그대로 보낸다 0 -> 0, kang -> kang -->
+	<select id="selectEmpInfo" resultType="EmpVO">
+		SELECT employee_id
+		     , first_name
+		     , last_name
+		     , email
+		     , phone_number
+		     , hire_date
+		     , job_id
+		     , salary
+		     , commission_pct
+		     , manager_id
+		     , department_id
+		  FROM employees
+		 WHERE employee_id = #{employeeId}
+	</select>
+	
+	<!-- 등록, 수정에서 지원하는 키가 있다 -->
+	<!-- 등록 -->
+	<insert id="insertEmpInfo" parameterType="EmpVO">
+		<selectKey keyProperty="employeeId" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(employee_id),0) + 1
+			  FROM employees
+		</selectKey>
+		INSERT INTO employees
+		     (  employee_id,   first_name,   last_name
+		     ,  email, hire_date,  job_id,   salary   )
+		VALUES 
+		     ( #{employeeId}, #{firstName}, #{lastName}
+		     , #{email}, SYSDATE, #{jobId}, #{salary} )
+	</insert>
+	
+	<!-- 수정 - 급여를 정해진 비율로 인상 -->
+	<!-- 파라미터 값들이 여러개 일때는 파라미터타입을 주지 않는다 -->
+	<update id="updateEmpSal">
+		UPDATE employees
+		   SET salary = salary * ( 1 + #{raise} / 100 )
+		 WHERE employee_id = #{empId}
+	</update>
+	
+	<!-- 수정 - 사원 정보 수정 -->
+	<!-- 
+		 1) 모든 항목에 업데이트 진행, 전제조건 : 모든 항목에 정보가 존재해야함
+		 2) Mybatis -> Dynamic SQL 사용 ==> 해당 업데이트 항목에만 진행한다
+	 -->
+	<update id="updateEmpInfo" parameterType="EmpVO">
+		UPDATE employees
+			<set>
+				<if test="firstName != null and !firstName.equals('')">
+					first_name = #{firstName},
+				</if>
+				<if test="email != null and !email.equals('')">
+					email = #{email},
+				</if>
+				<if test="salary > 0">
+					salary = #{salary},
+				</if>
+		    </set>
+		 WHERE employee_id = #{employeeId}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteEmpInfo" parameterType="int">
+		DELETE
+		  FROM employees
+		 WHERE employee_id = #{employeeId}
+	</delete>
+	
+	
+</mapper>
