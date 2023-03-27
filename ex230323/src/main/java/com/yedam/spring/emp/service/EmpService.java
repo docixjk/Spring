@@ -20,6 +20,6 @@ public interface EmpService {
 		public Map<String, String> updateEmp(EmpVO empVO);
 		
 		// 삭제
-		public Map<String, String> deleteEmp(int empId);
+		public Map<String, String> deleteEmp(int employeeId);
 		
 }

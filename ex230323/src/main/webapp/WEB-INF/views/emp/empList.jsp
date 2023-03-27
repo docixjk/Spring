@@ -6,6 +6,7 @@
 		<head>
 			<meta charset="UTF-8">
 			<title>전체조회</title>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 			<style>
 				table,
 				tr,
@@ -17,6 +18,7 @@
 		</head>
 
 		<body>
+			<button type="button" onclick="location.href='empInsert'">등록</button>
 			<table>
 				<thead>
 					<tr>
@@ -27,6 +29,7 @@
 						<th>hire_date</th>
 						<th>job_id</th>
 						<th>salary</th>
+						<th>Delete</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,16 +42,38 @@
 							<td>${emp.hireDate}</td>
 							<td>${emp.jobId}</td>
 							<td>${emp.salary}</td>
+							<td>
+								<button type="button" onclick="deleteInfo(${emp.employeeId},event)">삭제</button>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 
 			<script>
+
 				function printAlert(message) {
+					if (message == null || message == '') {
+						return;
+					}
 					alert(message);
 				}
 				printAlert(`${result}`);
+
+				function deleteInfo(id, event) {
+					$.ajax({
+						url: 'empDelete',
+						method: 'post',
+						data: { employeeId: id },
+						// dataType:'json', // 제이쿼리는 이걸 생략가능함 ( html, text, json, xml )
+						success: function (data) {
+							console.log(data)
+						}, error: function (rej) {
+							console.log(rej)
+						}
+					})
+					event.stopPropagation(); // 이벤트 버블링 막는거
+				}
 			</script>
 		</body>
 
