@@ -31,7 +31,7 @@
 	</beans:bean>
 
 	<!-- tiles 관련 -->
-	<beans:bean id="tilesConfigurer"
+<!-- 	<beans:bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<beans:property name="definitions">
 			<beans:list>
@@ -45,7 +45,7 @@
 		<beans:property name="order" value="1" />
 
 	</beans:bean>
-
+ -->
 
 	<!-- bean을 등록할때 사용됨 -->
 	<context:component-scan

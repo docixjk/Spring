@@ -17,22 +17,22 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardMapper boardMapper;
 	
-	@Override
+	@Override // 전체조회
 	public List<BoardVO> getBoardList() {
 		return boardMapper.boardAllList();
 	}
 
-	@Override
+	@Override // 단건조회
 	public BoardVO getBoard(BoardVO boardVO) {
 		return boardMapper.selectBoard(boardVO);
 	}
 
-	@Override
+	@Override // 작성하는 글번호 알아내기
 	public BoardVO getBoardNo() {
 		return boardMapper.getBoardNo();
 	}
 
-	@Override
+	@Override // 등록한 글번호 반환
 	public int insertBoard(BoardVO boardVO) {
 		int result = boardMapper.insertBoard(boardVO);
 
@@ -43,36 +43,28 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 
-	@Override
-	public Map<String, String> updateBoard(BoardVO boardVO) {
-		Map<String, String> map = new HashMap<>();
+	@Override // 수정한 글번호 반환
+	public int updateBoard(BoardVO boardVO) {
 		
-		// map은 여러가지 정보를 넘길 수 있다.
-		map.put("글번호", String.valueOf(boardVO.getBno()));
 		
 		int result = boardMapper.updateBoard(boardVO);
 		
 		if(result == 1) {
-			map.put("결과", "Success");
+			return boardVO.getBno();
 		}else {
-			map.put("결과", "Fail");
+			return -1;
 		}
-		return map;
 	}
 
 	@Override
-	public Map<String, String> deleteBoard(int bno) {
-		Map<String, String> map = new HashMap<>();
-		map.put("글번호", String.valueOf(bno));
-		
+	public int deleteBoard(int bno) {
 		int result = boardMapper.deleteBoard(bno);
 
 		if(result == 1) {
-			map.put("결과", "Success");
+			return bno;
 		}else {
-			map.put("결과", "Fail");
+			return -1;
 		}
-		return map;
 	}
 
 	

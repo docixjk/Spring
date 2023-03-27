@@ -1,7 +1,6 @@
 package com.yedam.spring.board.service;
 
 import java.util.List;
-import java.util.Map;
 
 public interface BoardService {
 
@@ -14,12 +13,12 @@ public interface BoardService {
 	// 등록하고자 하는 글번호
 	public BoardVO getBoardNo();
 	
-	// 등록
+	// 등록 - 등록된 글번호 반환
 	public int insertBoard(BoardVO boardVO);
 	
-	// 수정
-	public Map<String, String> updateBoard(BoardVO boardVO);
+	// 수정 - 수정된 글번호 반환
+	public int updateBoard(BoardVO boardVO);
 	
-	// 삭제
-	public Map<String, String> deleteBoard(int bno);
+	// 삭제 - 삭제된 글번호 반환
+	public int deleteBoard(int bno);
 }
