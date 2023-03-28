@@ -1,8 +1,6 @@
 package com.yedam.spring.board.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +32,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override // 등록한 글번호 반환
 	public int insertBoard(BoardVO boardVO) {
+		
 		int result = boardMapper.insertBoard(boardVO);
 
 		if (result == 1) {
@@ -46,7 +45,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override // 수정한 글번호 반환
 	public int updateBoard(BoardVO boardVO) {
 		
-		
 		int result = boardMapper.updateBoard(boardVO);
 		
 		if(result == 1) {
@@ -58,6 +56,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int deleteBoard(int bno) {
+		
 		int result = boardMapper.deleteBoard(bno);
 
 		if(result == 1) {
