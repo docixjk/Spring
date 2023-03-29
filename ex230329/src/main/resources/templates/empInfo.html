@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>사원정보</title>
+	<script th:inline="javascript">
+		function getCtx() {
+			return /*[[${#httpServletRequest.getContextPath()}]]*/'';
+		}
+	</script>
+	<Style>
+		label {
+			width: 150px;
+		}
+	</Style>
+</head>
+
+<body>
+	<div>
+		<div>
+			<label id="employeeId">사원번호</label>
+			<input type="text" id="employeeId" th:value="${empInfo.employeeId}" readonly>
+		</div>
+		<div>
+			<label id="firstName">이름</label>
+			<input type="text" id="firstName" th:value="${empInfo.firstName}" readonly>
+		</div>
+		<div>
+			<label id="email">이메일</label>
+			<input type="text" id="email" th:value="${empInfo.email}" readonly>
+		</div>
+		<div>
+			<label id="hireDate">입사일</label>
+			<input type="text" id="hireDate" th:value="${#dates.format(empInfo.hireDate, 'yyyy/MM/dd')}" readonly>
+		</div>
+		<div>
+			<label id="jobId">업무</label>
+			<input type="text" id="jobId" th:value="${empInfo.jobId}" readonly>
+		</div>
+		<div>
+			<button type="button" th:onclick="|location.href='@{/empList}'|">목록</button>
+		</div>
+	</div>
+
+</body>
+
+</html>

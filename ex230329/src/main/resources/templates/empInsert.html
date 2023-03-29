@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>사원등록</title>
+  <script th:inline="javascript">
+    function getCtx() {
+      return /*[[${#httpServletRequest.getContextPath()}]]*/'';
+    }
+  </script>
+</head>
+
+<body>
+  <!-- 앳(골뱅이)를 넣으면 컨택트패스를 자동으로 해줌  ↓ 이걸 쓰면 ↓ 이 타입으로 보낸다는 말-->
+  <form th:action="@{/empInsert}" method="post" th:object="${empVO}">
+    <div>
+      <label id="employeeId">사원번호</label>
+      <input type="text" id="employeeId" th:field="*{employeeId}"><!-- 이 필드명에 넣는다 -->
+    </div>
+    <div>
+      <label id="lastName">이름</label>
+      <input type="text" id="lastName" th:field="*{lastName}">
+    </div>
+    <div>
+      <label id="email">이메일</label>
+      <input type="text" id="email" th:field="*{email}">
+    </div>
+    <div>
+      <label id="hireDate">입사일</label>
+      <input type="date" id="hireDate" th:field="*{hireDate}">
+    </div>
+    <div>
+      <label id="jobId">업무</label>
+      <input type="text" id="jobId" th:field="*{jobId}">
+    </div>
+    <div>
+      <button type="submit">등록</button>
+      <button type="button" th:onclick="|location.href='@{empList}'|">취소</button>
+    </div>
+  </form>
+</body>
+
+</html>
